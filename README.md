@@ -1,2 +1,2 @@
-# neetcode
+# Neetcode
 A code execution platform.
