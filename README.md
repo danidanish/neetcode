@@ -1,22 +1,22 @@
 # Neetcode
 A code execution platform.
-<h3>FrontEnd:</h3>
+<h2>FrontEnd:</h2>
 •React js
 <br/>
-<h3>Styling:</h3>
+<h2>Styling:</h2>
 •Tailwind
 <br/>
-<h3>Backend:</h3>
+<h2>Backend:</h2>
 •Node js
 •Express js
 <br/>
-<h3>ORM:</h3>
+<h2>ORM:</h2>
 •Prisma
 <br/>
-<h3>Messaging Queue:</h3>
+<h2>Messaging Queue:</h2>
 •RabbitMQ
 <br/>
-<h3>Code Execution Engine:</h3>
+<h2>Code Execution Engine:</h2>
 •Judge0
 <br/>
 
