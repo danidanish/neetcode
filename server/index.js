@@ -12,6 +12,7 @@ const queue = 'tasks';
 var USER_ID_COUNTER=1;
 app.use(parser.json())
 const cors = require('cors');
+const axios = require('axios')
 app.use(cors());
 app.use(session({
   secret: 'someSecretKey',
@@ -175,17 +176,23 @@ app.post('/runsolution',async (req,res)=>{
       const connection = await amqplib.connect('amqp://localhost')
       const channel = await connection.createChannel();
       await channel.assertQueue(queue);
-      // q.sendToQueue(queue,Buffer.from(res.body.solution))
       channel.sendToQueue(queue,Buffer.from(req.body.solution))
-      setTimeout(()=> {
-        connection.close();
-        process.exit(0)
-        }, 500);
+      channel.close();
       res.status(200).send({msg:'Solution sent to queue!'});
     } catch (error) {
     res.status(400).send({msg:`Error: ${error}`});
   }
   });
+
+app.get('/getLanguages',async(req,res)=>{
+  try {
+    const languages = await axios.get('https://ce.judge0.com/languages/')
+    console.log(languages.data)
+    res.status(200).send(languages.data);
+  } catch (error) {
+    res.status(400).send({msg:`Error: ${error}`});
+  }
+})
 
 app.listen(port, function() {
   console.log(`Example app listening on port ${port}`)

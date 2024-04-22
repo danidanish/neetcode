@@ -62,9 +62,10 @@ button {
   padding-right: 2.5rem;
 }
 .partitioned-input-container textarea {
+  display: flex;
   padding: 2%;
   width: 100%;
-  height: 90%;
+  height: 70%;
 }
 .dropdown {
   position: relative;
