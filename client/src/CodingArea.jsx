@@ -2,6 +2,8 @@ import { useState } from "react"
 import './App.css'
 import './styles/style.css'
 import { useLocation } from 'react-router-dom';
+
+
 function Problem(){
 
 
@@ -26,22 +28,16 @@ function Problem(){
      )
 }
 function CodingArea(){
-    const [textInput,setTextInput] = useState('JavaCode');
-    const [codingLanguage,setcodingLanguage] = useState('JavaCode');
+    const [textInput,setTextInput] = useState('test');
+    const [codingLanguage,setcodingLanguage] = useState(['Assembly']);
     const handleInputChange=(e)=>{
         setTextInput(e.target.value);
     }
-    const javaSkeletonCode=()=>{
-        setTextInput('JavaCode');
-        setcodingLanguage('JavaCode');
-    }
-    const cplusSkeletonCode=()=>{
-        setTextInput('CPlusCode');
-        setcodingLanguage('CPlusCode');
-    }
-    const pythonSkeletonCode=()=>{
-        setTextInput('PythonCode');
-        setcodingLanguage('PythonCode');
+    async function CodingLanguages(){
+        const json = await fetch('http://localhost:3001/getLanguages');
+        const languages = await json.json();
+        const names =languages.map((e)=>e.name)
+        setcodingLanguage(names);
     }
     async function SubmitSolution(){
         const token = localStorage.getItem('jwttokenkey')
@@ -100,11 +96,11 @@ You can return the answer in any order.</p>
         </div>
 <div>
         <div className="dropdown">
-  <button className="dropbtn rounded-md px-5">{codingLanguage}</button>
+  <button className="dropbtn rounded-md px-5" onClick={CodingLanguages}>Assembly</button>
   <div className="dropdown-content">
-    <a onClick={javaSkeletonCode}>Java</a>
-    <a onClick={cplusSkeletonCode}>C++</a>
-    <a onClick={pythonSkeletonCode}>Python</a>
+  {codingLanguage.map((element, index) => (
+    <a key={index}>{element}</a>
+  ))}
   </div>
 </div>
 <textarea
